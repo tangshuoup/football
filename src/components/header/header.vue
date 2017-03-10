@@ -1,11 +1,7 @@
-<template>
-	
+<template>	
 	<div class="header">
 		<div class="header-wrapper">
-			<span class="el-icon-menu" @click="toggleMask"></span>
-			<div class="switchover">
-							
-			</div>
+			<span class="iconfont icon-liebiao" @click="toggleMask"></span>
 		</div>
 		<div class="mask" v-show="maskShow">
 			<div class="mask-content">
@@ -14,8 +10,8 @@
 				</div>
 				<div class="name"></div>
 				<div class="intro"></div>
-				<ul>
-					<li @click="navTab(i)" v-for="(item, i) in tabList" class="li-item">{{item}}</li>
+				<ul compact="tab-list">
+					<li @click="navTab(i)" v-for="(item, i) in tabList" class="li-item border-1px">{{item}}</li>
 				</ul>
 			</div>
 		</div>
@@ -26,44 +22,43 @@
 </template>
 <script>
 	export default {
-		name: 'header',		
+		name: 'header',	
 		data() {
-			return {
+			return {				
 				maskShow: false,
 				tabList: ['足球现场', '足球生活', '足球美女']
 			}		
-		},
+		},	
 		methods: {
 			toggleMask() {
-				this.maskShow = !this.maskShow;
+				this.maskShow = !this.maskShow;				
 			},
-			navTab(index) {			
-				// Hub.$emit('tab', index);
-			}
+			navTab(index) {												
+			    this.$router.push('/index');			    
+			    this.$store.commit('increment', index);				    
+			    this.toggleMask();			   							
+			}			
 		}
+		
 	}
 </script>
 <style rel="stylesheet/scss" lang="scss">
-.header{
-	position: relative;
+@import '../../common/sass/mixin.scss';
+.header{	
+	width: 100%;
 	.header-wrapper{
 		width: 100%;
+		height: 0.87rem;
 		overflow: hidden;	
 		background: #0cc440;
-	  	.el-icon-menu{
-	  	  padding: 0.34rem;          
-          font-size: 0.32rem;
+	  	.icon-liebiao{
+	  	  padding-left: 0.32rem;
+	  	  line-height: 0.87rem;        
+          font-size: 0.23rem;
           color: #ffffff;
           float: left;      
       	}
-      	.switchover{
-      		font-size: 0;   
-          	float: left;
-          	.host-pot, .attention{
-          	display: inline-block;
-          	font-size: 0.26rem;
-          } 
-		}
+      	
 	}
 	.mask{
 		position: fixed;
@@ -72,10 +67,12 @@
 		width: 3.58rem;
 		height: 100%;
 		background: rgba(26,54,29,0.6);
-		z-index: 10;
+		z-index: 100;
 		.li-item{
+			padding:0.15rem 0;
 			font-size: 0.26rem;
 			color: #fff;
+			@include border-1px(rgba(255,255,255,0.4));
 		}
 	}
 	.shade{
@@ -85,7 +82,7 @@
 		width: 100%;
 		height: 100%;
 		background: rgba(0,0,0,0.4);
-		z-index: 9;
+		z-index: 99;
 	}
 }
 

@@ -1,63 +1,77 @@
 <template>
-	<div class="index">
-		<nav class="nav border-1px">
-      <ul class="item">
-        <li @click="tab(i)" v-for="(item, i) in navList" class="item-list" :class="{'active': curIndex===i}">{{item}}</li>
-      </ul>
-    </nav>
-
+	<div class="index" >
+    <div class="switchover">
+          <div class="swith-index">
+            <span class="host-pot" @click="attShowTrue" :class="attentionShow ? 'switch-active' : ''">热点</span>
+            <span class="attention" @click="attShow" :class="attentionShow ? '' : 'switch-active'">关注</span>
+          </div>  
+      </div>
+      <host v-show="attentionShow"></host>
+      <attention v-show="!attentionShow" ref="attention"></attention>  
 	</div>
 </template>
 <script>
-// import Swiper from 'swiper'
-
+import host from '../host/host'
+import attention from '../attention/attention'
 	export default {
 		data() {
-      		return {
-        		curIndex: 0,
-            navList: ['足球现场', '足球生活', '足球美女']
+      		return {             	           
+            attentionShow: true                     
       		};
-    	},
-      // created() {
-      //   Hub.$on('tab', (index) => {
-      //     this.index = this.curIndex
-      //   })
-      // },
-    	methods: {
-      	tab(index) {
-          this.curIndex = index;          
-        }
+    	},            
+    	methods: { 
+        attShow() {          
+          this.attentionShow = false;
+          this.$refs.attention.show();
+        },
+        attShowTrue() {         
+           this.attentionShow = true
+        }        
     	},
       components: {
-        
-      }
-}
+        host,
+        attention          
+      }           
+  }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-@import '../../common/sass/mixin';
-
-.index{ 
-    .nav{    
-     @include border-1px(rgb(217,217,217)); 
-     box-sizing: border-box;
-      .item{
-        width: 100%;
-        height: 0.7rem;      
-        display: flex;
-        justify-content: space-around;
-        .item-list{
-          width: 33.3%;
-          font-size: 0.3rem;
-          color: #686868;
-          text-align: center;
-          line-height: 0.7rem;
-          &.active{
-            border-bottom: 4px solid #0cc440;
-            color: #0cc440;
+  
+  .index{ 
+     display: flex;
+     flex-direction:column;
+     overflow: hidden;
+     flex:1;
+    .switchover{
+        width: 60%;
+        font-size: 0;
+        position:absolute;
+        top: 0;
+        left: 20%;     
+        .swith-index{ 
+          width: 2.35rem; 
+          height: 0.5rem;
+          margin: 0.2rem auto;
+            .host-pot, .attention{
+              display: inline-block;
+              vertical-align: top;
+              width: 50%;
+              font-size: 0.26rem;
+              line-height: 0.5rem; 
+              background: #3dd066;              
+            &.host-pot{
+              border-top-left-radius:16px;
+              border-bottom-left-radius:16px;
+            }
+            &.attention{
+              border-top-right-radius:16px;
+              border-bottom-right-radius:16px;
+            }
+            &.switch-active{
+              background: #63d985;
+              color: #fff;
+            }
           }
-        }
+        } 
       }
-    }
-  }
-
+    }   
 </style>

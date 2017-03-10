@@ -10,3 +10,22 @@
 		content: '';
 	}
 }
+
+.clearfix{
+	display: inline-block;
+	:after{
+		content:'';
+		display: block;
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+}
+
+//宽高
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
+
