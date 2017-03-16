@@ -1,0 +1,3 @@
+export const TOOGGLE_TAB = 'TOOGGLE_TAB'
+export const GETINDEX_LIST = 'GETINDEX_LIST'
+

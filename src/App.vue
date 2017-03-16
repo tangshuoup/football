@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <my-header>      
-    </my-header>
-    
+    </my-header>   
     <transition name="router-fade" mode="out-in">
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
-    </transition>
-    
+    </transition>  
      <ul class="footer">
       <router-link to="/index" class="foot-tab">  
         <li>
@@ -16,7 +14,7 @@
           <b>首页</b>
         </li>
       </router-link>
-      <router-link to="/search" class="foot-tab"> 
+      <router-link :to="{ path: '/search', query: { id: this.curIndex }}" class="foot-tab">
         <li>
           <i class="iconfont icon-faxian"></i>
           <b>发现</b>
@@ -48,7 +46,7 @@ import header from './components/header/header';
 export default {
   data() {
     return {
-      curIndex: []  
+      curIndex: 456  
     }
   }, 
   methods: {

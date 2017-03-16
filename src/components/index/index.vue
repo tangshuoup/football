@@ -1,5 +1,5 @@
 <template>
-	<div class="index" >
+	<div class="index" ref="index">
     <div class="switchover">
           <div class="swith-index">
             <span class="host-pot" @click="attShowTrue" :class="attentionShow ? 'switch-active' : ''">热点</span>
@@ -8,17 +8,23 @@
       </div>
       <host v-show="attentionShow"></host>
       <attention v-show="!attentionShow" ref="attention"></attention>  
+  
 	</div>
 </template>
 <script>
 import host from '../host/host'
 import attention from '../attention/attention'
 	export default {
+    props: {
+      index: {
+        type: Object
+      }
+    },
 		data() {
       		return {             	           
-            attentionShow: true                     
+            attentionShow: true                    
       		};
-    	},            
+    	},
     	methods: { 
         attShow() {          
           this.attentionShow = false;

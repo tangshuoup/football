@@ -13,7 +13,15 @@ export default new Router({
     {
     	path: '/index',
     	name: 'index',
-    	component: index
+    	component: index,
+      children: [{
+        path: 'movieDetial',
+        component(resolve) {
+          require.ensure(['../components/moive/movie.vue'], () => {
+            resolve(require('../components/moive/movie.vue'));
+          });
+        }
+      }]
     },
     {
     	path: '/search',

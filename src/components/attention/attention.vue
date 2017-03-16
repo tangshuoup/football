@@ -27,11 +27,12 @@ import BScroll from 'better-scroll'
 		data() {
 			return {
 				attention: {},
-				showLoading: true
+				showLoading: true,
+				count: 20			
 			}
 		},
 		created() {
-			this.$http.get('/api/v2/movie/subject/26865690/comments?apikey=0b2bdeda43b5688921839c8ecb20399b&count=20&client=&udid=')
+			this.$http.get('/api/v2/movie/subject/26865690/comments?apikey=0b2bdeda43b5688921839c8ecb20399b&count='+this.count+'&client=&udid=')
 			.then((response) => {
 				if (response.status === ERR_OK) {
                   this.attention = response.data.comments;
