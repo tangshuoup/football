@@ -3,12 +3,12 @@
 		<ul ref="ul">
 			<li v-for="item in attention" class="item-list">
 				<div class="top">
-					<img :src="item.author.avatar" alt="">
+					<img :src="item.avatarurl" alt="">
 					<div class="name-warpper">
-						<span class="name">{{item.author.name}}</span>
+						<span class="name">{{item.nick}}</span>
 						<span class="signature">{{item.content}}</span>
 						<div class="like">
-							<span class="count">{{item.useful_count}}</span>
+							<span class="count">{{item.approve}}</span>
 							<span class="iconfont icon-unie60b"></span>
 						</div>
 					</div>
@@ -27,15 +27,14 @@ import BScroll from 'better-scroll'
 		data() {
 			return {
 				attention: {},
-				showLoading: true,
-				count: 20			
+				showLoading: true		
 			}
 		},
 		created() {
-			this.$http.get('/api/v2/movie/subject/26865690/comments?apikey=0b2bdeda43b5688921839c8ecb20399b&count='+this.count+'&client=&udid=')
+			this.$http.get('/api/comments.json?movieid=246363&limit=10&offset=5')
 			.then((response) => {
-				if (response.status === ERR_OK) {
-                  this.attention = response.data.comments;
+				if (response.status === ERR_OK) {				
+                  this.attention = response.data.data.CommentResponseModel.cmts
                   this.$nextTick(() => {                  	          		             
 	                 if (!this.scroll) {
 		                this.scroll = new BScroll(this.$refs.attention, {		     
@@ -65,7 +64,7 @@ import BScroll from 'better-scroll'
 </script>
 <style rel="stylesheet/scss" lang="scss">
 .attention-wrapper{
-	height: 9rem;
+	height: 7.5rem;
 	.item-list{
 		.top{
 			display: flex;

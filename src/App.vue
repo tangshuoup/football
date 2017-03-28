@@ -113,7 +113,7 @@ export default {
       }   
       &.active{
           i,b{
-            color:#11c33b;
+            color:#D43C33;
           }
       }     
     }                  

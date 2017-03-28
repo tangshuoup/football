@@ -14,25 +14,30 @@
 <script>
 import host from '../host/host'
 import attention from '../attention/attention'
+import {mapMutations} from 'vuex'
 	export default {
     props: {
       index: {
         type: Object
       }
     },
-		data() {
-      		return {             	           
-            attentionShow: true                    
-      		};
+		computed: {
+      attentionShow() {
+          return this.$store.state.attentionShow
+        }    	
     	},
-    	methods: { 
+    	methods: {
+      ...mapMutations([
+            'TOOGGLE_TAB',
+            'TOOGGLE_TITLE'
+        ]),    
         attShow() {          
-          this.attentionShow = false;
+          this.TOOGGLE_TITLE(false);
           this.$refs.attention.show();
         },
         attShowTrue() {         
-           this.attentionShow = true
-        }        
+            this.TOOGGLE_TITLE(true);
+        }           
     	},
       components: {
         host,
@@ -63,7 +68,7 @@ import attention from '../attention/attention'
               width: 50%;
               font-size: 0.26rem;
               line-height: 0.5rem; 
-              background: #3dd066;              
+              background: #D43C33;              
             &.host-pot{
               border-top-left-radius:16px;
               border-bottom-left-radius:16px;
@@ -73,7 +78,7 @@ import attention from '../attention/attention'
               border-bottom-right-radius:16px;
             }
             &.switch-active{
-              background: #63d985;
+              background: #a43C33;
               color: #fff;
             }
           }

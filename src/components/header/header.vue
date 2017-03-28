@@ -33,7 +33,8 @@ import {mapMutations} from 'vuex'
 		},
 		methods: {
 			...mapMutations([
-			    'TOOGGLE_TAB'
+			    'TOOGGLE_TAB',
+			    'TOOGGLE_TITLE'
 			]),
 			toggleMask() {
 				this.maskShow = !this.maskShow;				
@@ -41,7 +42,8 @@ import {mapMutations} from 'vuex'
 			navTab(index) {
 				this.toggleMask();												
 			    this.$router.push('/index');
-			    this.TOOGGLE_TAB(index);			    	
+			    this.TOOGGLE_TAB(index);
+			    this.TOOGGLE_TITLE(true);			    	
 			}
 		}
 		
@@ -55,7 +57,7 @@ import {mapMutations} from 'vuex'
 		width: 100%;
 		height: 0.87rem;
 		overflow: hidden;	
-		background: #0cc440;
+		background: #e54847;
 	  	.icon-liebiao{
 	  	  padding-left: 0.32rem;
 	  	  line-height: 0.87rem;        
@@ -80,7 +82,7 @@ import {mapMutations} from 'vuex'
 					left: 0;
 					width: 3.58rem;
 					height: 100%;
-					background: rgba(26,54,29,0.6);
+					background: rgba(0,0,0,0.6);
 					z-index: 100;
 				.li-item{
 					padding:0.15rem 0;

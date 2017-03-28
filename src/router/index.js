@@ -20,7 +20,15 @@ export default new Router({
           require.ensure(['../components/moive/movie.vue'], () => {
             resolve(require('../components/moive/movie.vue'));
           });
-        }
+        },
+        children: [{
+          path: 'essay',
+          component(resolve) {
+              require.ensure(['../components/essay/essay.vue'], () => {
+                resolve(require('../components/essay/essay.vue'));
+            });
+          }
+        }]       
       }]
     },
     {
