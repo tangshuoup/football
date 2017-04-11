@@ -103,7 +103,7 @@ const ERR_OK = 200;
                 this.commentList = response.data.data.CommentResponseModel;                             
                 this.$nextTick(() => {                	 
                 	this._initScroll();                	
-                this.showLoading = false;                                     
+                	this.showLoading = false;                                     
               })                                    
             }
       	});    
@@ -111,14 +111,16 @@ const ERR_OK = 200;
 	   watch: {
 	   		movieList() {
 	   			this.$nextTick(() => {
-	    			// this._initPics();	    			
+	    			this._initPics();	    			
 	    			this._initScroll();
 	    		})
 	   		}
 	   },
-	    mounted() {	    	
-	    		// this._initPics();	    
-	    		this._initScroll();	    			    	
+	    mounted() {	 
+	    	this.$nextTick(() => {   	
+	    		this._initPics();	    
+	    		this._initScroll();
+	    	})	    			    	
 	    },
         methods: {
         	backHistory(event) {
@@ -145,24 +147,24 @@ const ERR_OK = 200;
 			  			 this.scroll.refresh();			  			
 	  			}
             },
-       //      _initPics() {
-       //      	if (this.movieList.photos) {
-       //      		let picWidth = 60;
-		  			// let margin = 10;
-		  			// let width = (picWidth + margin)* this.movieList.photos.length - margin;
-		  			// this.$refs.actorWrapper.style.width = width +'px';		  		
-		  			// this.$nextTick(() => {
-		     //        if (!this.picScroll) {
-		     //          this.picScroll = new BScroll(this.$refs.movieActor, {
-		     //            scrollX: true,
-		     //            eventPassthrough: 'vertical'
-		     //          });
-		     //        } else {
-		     //          this.picScroll.refresh();
-		     //        }
-       //    		 });
-       //      	}
-       //      },
+            _initPics() {
+            	if (this.movieList.photos) {
+            		let picWidth = 60;
+		  			let margin = 10;
+		  			let width = (picWidth + margin)* this.movieList.photos.length - margin;
+		  			this.$refs.actorWrapper.style.width = width +'px';		  		
+		  			this.$nextTick(() => {
+		            if (!this.picScroll) {
+		              this.picScroll = new BScroll(this.$refs.movieActor, {
+		                scrollX: true,
+		                eventPassthrough: 'vertical'
+		              });
+		            } else {
+		              this.picScroll.refresh();
+		            }
+          		 });
+            	}
+            },
             toggleEssay() {
             	this.$refs.essay.show();
             }
@@ -328,7 +330,6 @@ const ERR_OK = 200;
 	    .actor-wrapper{
 	    	width: 100%;
 	    	padding: 0.3rem 0 0.1rem 0.3rem;
-	    	overflow-x: scroll;
    			white-space: nowrap;
 	    	.actor-item{
 	    		display: inline-block;	    		

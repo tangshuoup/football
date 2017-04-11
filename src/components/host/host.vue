@@ -7,15 +7,15 @@
         	</nav>   
          <div class="swiper-container" ref="swiperContainer">
             <div class="swiper-wrapper" >
-                <div class="swiper-slide site" ref="site">             
+                <div class="swiper-slide site" ref="site">                    
                     <ul class="site-wrapper">   
-                    <li class="site-list" v-for="item in index">                  
-                       <router-link :to="{ path:'/index/movieDetial', query: { id: item.id }}" class="click-wrapper" > 
-                        <img :src="item.img" alt="">
-                        <span class="title">{{item.nm}}</span>
-                        </router-link> 
-                      </li>                               
-                    </ul>         
+                      <li class="site-list" v-for="item in index">                  
+                         <router-link :to="{ path:'/index/movieDetial', query: { id: item.id }}" class="click-wrapper" > 
+                          <img :src="item.img" alt="">
+                          <span class="title">{{item.nm}}</span>
+                          </router-link> 
+                        </li>                               
+                    </ul>                         
                 </div>
                 <div class="swiper-slide">
                   足球生活
@@ -43,7 +43,8 @@ import loading from '../loading/loading'
       		return {             	
             	navList: ['足球现场', '足球生活', '足球美女'],
               index: {},
-              showLoading: true                                                               
+              showLoading: true,
+              allLoaded: false                                                               
       		};
     	},
       created() {    
@@ -72,7 +73,7 @@ import loading from '../loading/loading'
       	},
     	methods: {
          initData() {
-           this.$http.get('/api/movie/list.json?type=hot&offset=1&limit=1000').then((response) => {   
+           this.$http.get('/api/movie/list.json?type=hot&offset=0&limit=10').then((response) => {   
              if (response.status === ERR_OK) {   
                     this.index = response.data.data.movies;                  
                     this.$nextTick(() => {                    
@@ -137,16 +138,16 @@ import loading from '../loading/loading'
     }
     .swiper-slide{
       width: 100%;
-      height: 7.5em; 
+      height: 8rem;
       .site-wrapper{
           display: flex;                                                                    
           flex-direction:row;
           flex-wrap: wrap;
           justify-content: space-between;
           .site-list{
-            width: 3.14rem;
+            width: 3.1rem;
             border: 1px solid #E5E5E5;
-            margin-bottom: 0.13rem; 
+            margin-bottom: 0.13rem;             
             .click-wrapper{
               position: relative;
               z-index: 100;
